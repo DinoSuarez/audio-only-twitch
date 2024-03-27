@@ -11,10 +11,10 @@ use std::io;
 
 fn main(){
 
-    let mut s1:String = String::new();
-    let mut confirmstart:String = String::new();
-    let s2:&str = "streamlink twitch.tv/";
-    let s3:&str = " audio_only";
+    let mut channel_name:String = String::new();
+    let mut confirm_start:String = String::new();
+    let s1:&str = "streamlink twitch.tv/";
+    let flag1:&str = " audio_only";
 
     println!("This program requires Streamlink and VLC to be installed.");
     println!("");
@@ -22,27 +22,29 @@ fn main(){
     println!("");
 
     io::stdin()
-        .read_line(&mut s1) // Is this really easier than cin >> s1
+        .read_line(&mut channel_name) 
         .unwrap();
 
     print!("You typed ");
-    print!("{s1}");
+    print!("{channel_name}");
     println!(" is this correct? (y/N)");
 
    io::stdin()
-        .read_line(&mut confirmstart)
+        .read_line(&mut confirm_start)
         .unwrap();
 
-   if confirmstart.trim() == "y"
+   if confirm_start.trim() == "y"
    
         {
-                //staple all the strings together to pass into the terminal
-        let bruh:String = s1.to_owned() + &s3;
-        let finaloutput:String = s2.to_owned() + &bruh;
+        
+        let final_command:String = s1.to_owned() + &channel_name + &flag1;
+
+        // testing if final_command looks how I want
+        println!("{final_command}");
         
 
-            // Pass the final string as a terminal command
-           cmd!(&finaloutput)
+            // There's probably a way to do this without a crate but whatever
+           cmd!(&final_command)
                 .run()
                 .expect("Failed to start process");
                 
