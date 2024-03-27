@@ -39,10 +39,6 @@ fn main(){
         
         let final_command:String = s1.to_owned() + &channel_name + &flag1;
 
-        // testing if final_command looks how I want
-        println!("{final_command}");
-        
-
             // There's probably a way to do this without a crate but whatever
            cmd!(&final_command)
                 .run()
